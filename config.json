@@ -1,0 +1,10 @@
+{
+	"prefix": ["FF" , "/" , "ff" ], 
+
+    "token": "",
+
+	"bot_client_id" : "",
+
+	"id_server" : "", 
+	"channel_for_anti_and_exp" : []
+}
