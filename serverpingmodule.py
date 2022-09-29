@@ -16,7 +16,7 @@ class Status:
     vertype: str
     ping: float
 
-# * Главный класс
+# * Main class
 class Server:
     def __init__(
         self,
@@ -28,21 +28,21 @@ class Server:
         self.input_server: Tuple[str, int] = (server_host, input_port)
 
     def get_status(self, timeout: float=10.0) -> Status:
-        # * Инициализация сервера
+        # * Server initialization
         s = socket(AF_INET, SOCK_DGRAM)
         s.connect(self.server)
         s.settimeout(timeout)
 
-        # * Создание и так понятно чего для чего
+        # * Creation and so it is clear what for what
         info = {}
 
-        # * Получение данных и замер
+        # * Data acquisition and measurement
         s_time = time()
         s.send(b"\xfe\x01")
         data = s.recv(1024)
         e_time = time()
 
-        # * Парсинг
+        # * Parsing
         info["name"] = data[1:data[0]+1].decode("utf-8")
         data = data[data[0]+1:]
         info["map"] = data[1:data[0]+1].decode("utf-8")
@@ -68,12 +68,12 @@ class Server:
         s.close()
     
     def ping(self, timeout: float=10.0) -> int:
-        # * Инициализация сервера
+        # * Server initialization
         s = socket(AF_INET, SOCK_DGRAM)
         s.connect(self.server)
         s.settimeout(timeout)
 
-        # * Получение данных и замер
+        # * Data acquisition and measurement
         s_time = time()
         s.send(b"\xfe\x01")
         s.recv(1024)
